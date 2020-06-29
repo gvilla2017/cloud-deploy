@@ -79,21 +79,26 @@
     #     dest: "{{ working_dir }}/cluster-keys.json"
     #     content: "{{ exec_output.stdout }}"
 
-    - shell: cat {{ working_dir|quote }}/cluster-keys.json | jq -r ".unseal_keys_b64[]"
-    # - command: cat {{ working_dir|quote }}/cluster-keys.json
-      register: unseal_key
+    # - shell: cat {{ working_dir|quote }}/cluster-keys.json | jq -r ".unseal_keys_b64[]"
+    #   register: unseal_key
+    #
+    # - debug:
+    #     var: unseal_key
+    #
+    # - name: apply unseal key
+    #   community.kubernetes.k8s_exec:
+    #     kubeconfig: "{{ working_dir }}/{{gcp_prefix}}-config"
+    #     namespace: hashicorp
+    #     pod: "{{ item }}"
+    #     command: "vault operator unseal {{ unseal_key.stdout }}"
+    #   register: exec_output
+    #   with_items:
+    #     - vault-0
+    #     - vault-1
+    #     - vault-2
+
+    - shell: cat {{ working_dir|quote }}/cluster-keys.json | jq -r ".root_token"
+      register: root_token
 
     - debug:
-        var: unseal_key
-
-    - name: apply unseal key
-      community.kubernetes.k8s_exec:
-        kubeconfig: "{{ working_dir }}/{{gcp_prefix}}-config"
-        namespace: hashicorp
-        pod: "{{ item }}"
-        command: "vault operator unseal {{ unseal_key.stdout }}"
-      register: exec_output
-      with_items:
-        - vault-0
-        - vault-1
-        - vault-2
+        var: root_token
