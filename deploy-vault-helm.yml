@@ -1,0 +1,43 @@
+---
+- name: deploy nginx pod
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    - ./vars/default-vars.yml
+
+  tasks:
+
+    - name: Grab hashicorp repository
+      community.kubernetes.helm_repository:
+        repo_name: hashicorp
+        repo_url: https://helm.releases.hashicorp.com
+        # host: https://35.232.78.79
+        # kubeconfig: "{{ working_dir }}/{{gcp_prefix}}-config"
+        state: present
+
+    - name: Create helm namespace as HELM 3 doesn't create it automatically
+      community.kubernetes.k8s:
+        # host: https://35.232.78.79
+        kubeconfig: "{{ working_dir }}/{{gcp_prefix}}-config"
+        state: present
+        api_version: v1
+        kind: Namespace
+        name: "hashicorp"
+        wait: true
+
+    - name: Deploy consul with helm
+      community.kubernetes.helm:
+        kubeconfig_path: "{{ working_dir }}/{{gcp_prefix}}-config"
+        name: consul
+        chart_ref: hashicorp/consul
+        release_namespace: hashicorp
+        values:
+          global:
+            datacenter: vault-kubernetes-guide
+          client:
+            enabled: true
+          server:
+            replicas: 1
+            bootstrapExpect: 1
+            disruptionBudget:
+              maxUnavailable: 0
