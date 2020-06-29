@@ -32,7 +32,7 @@
         name: consul
         chart_ref: hashicorp/consul
         release_namespace: hashicorp
-        state: absent
+        # state: absent
         wait: true
         values:
           global:
@@ -51,7 +51,7 @@
         name: vault
         chart_ref: hashicorp/vault
         release_namespace: hashicorp
-        state: absent
+        # state: absent
         wait: true
         values:
           server:
@@ -64,26 +64,26 @@
             serviceNodePort: null
             externalPort: 8200
 
-    # - name: Retrieve unseal key
-    #   community.kubernetes.k8s_exec:
-    #     kubeconfig: "{{ working_dir }}/{{gcp_prefix}}-config"
-    #     namespace: hashicorp
-    #     pod: vault-0
-    #     command: "vault operator init -key-shares=1 -key-threshold=1 -format=json"
-    #   register: exec_output
-    #
-    # - debug:
-    #     var: exec_output
-    #
-    # - copy:
-    #     dest: "{{ working_dir }}/cluster-keys.json"
-    #     content: "{{ exec_output.stdout }}"
-    #
-    # - command: "cat {{ working_dir }}/cluster-keys.json | jq -r \".unseal_keys_b64[]\""
-    #   register: unseal_key
-    #
-    # - debug:
-    #     var: unseal_key
+    - name: Retrieve unseal key
+      community.kubernetes.k8s_exec:
+        kubeconfig: "{{ working_dir }}/{{gcp_prefix}}-config"
+        namespace: hashicorp
+        pod: vault-0
+        command: "vault operator init -key-shares=1 -key-threshold=1 -format=json"
+      register: exec_output
+
+    - debug:
+        var: exec_output
+
+    - copy:
+        dest: "{{ working_dir }}/cluster-keys.json"
+        content: "{{ exec_output.stdout }}"
+
+    - command: "cat {{ working_dir }}/cluster-keys.json | jq -r \".unseal_keys_b64[]\""
+      register: unseal_key
+
+    - debug:
+        var: unseal_key
 
     # - name: apply unseal key
     #   community.kubernetes.k8s_exec:
