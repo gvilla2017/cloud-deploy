@@ -65,7 +65,7 @@
         kubeconfig: "{{ working_dir }}/{{gcp_prefix}}-config"
         namespace: hashicorp
         pod: vault-0
-        command: "-- vault operator init -key-shares=1 -key-threshold=1 -format=json"
+        command: "vault operator init -key-shares=1 -key-threshold=1 -format=json"
       register: exec_output
 
     - debug:
