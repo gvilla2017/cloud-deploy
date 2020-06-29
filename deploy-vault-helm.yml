@@ -79,7 +79,7 @@
     #     dest: "{{ working_dir }}/cluster-keys.json"
     #     content: "{{ exec_output.stdout }}"
 
-    - command: "cat {{ working_dir }}/cluster-keys.json | jq -r \".unseal_keys_b64[]\""
+    - command: cat {{ working_dir|quote }}/cluster-keys.json | jq -r ".unseal_keys_b64[]"
       register: unseal_key
 
     - debug:
