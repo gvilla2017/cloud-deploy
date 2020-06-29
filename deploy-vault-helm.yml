@@ -79,15 +79,12 @@
     #     dest: "{{ working_dir }}/cluster-keys.json"
     #     content: "{{ exec_output.stdout }}"
 
-    # - command: cat {{ working_dir|quote }}/cluster-keys.json | jq -r ".unseal_keys_b64[]"
-    - command: cat {{ working_dir|quote }}/cluster-keys.json
+    - shell: cat {{ working_dir|quote }}/cluster-keys.json | jq -r ".unseal_keys_b64[]"
+    # - command: cat {{ working_dir|quote }}/cluster-keys.json
       register: unseal_key
 
     - debug:
         var: unseal_key
-
-    - debug:
-        var: lookup('pipe', unseal_key.stdout|quote )
 
     # - name: apply unseal key
     #   community.kubernetes.k8s_exec:
