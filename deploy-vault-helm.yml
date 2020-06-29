@@ -12,13 +12,10 @@
       community.kubernetes.helm_repository:
         repo_name: hashicorp
         repo_url: https://helm.releases.hashicorp.com
-        # host: https://35.232.78.79
-        # kubeconfig: "{{ working_dir }}/{{gcp_prefix}}-config"
         state: present
 
     - name: Create helm namespace as HELM 3 doesn't create it automatically
       community.kubernetes.k8s:
-        # host: https://35.232.78.79
         kubeconfig: "{{ working_dir }}/{{gcp_prefix}}-config"
         state: present
         api_version: v1
