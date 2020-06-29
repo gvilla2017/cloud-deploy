@@ -26,47 +26,71 @@
     #     name: "hashicorp"
     #     wait: true
     #
-    # - name: Deploy consul with helm
-    #   community.kubernetes.helm:
-    #     kubeconfig_path: "{{ working_dir }}/{{gcp_prefix}}-config"
-    #     name: consul
-    #     chart_ref: hashicorp/consul
-    #     release_namespace: hashicorp
-    #     values:
-    #       global:
-    #         datacenter: vault-kubernetes-guide
-    #       client:
-    #         enabled: true
-    #       server:
-    #         replicas: 1
-    #         bootstrapExpect: 1
-    #         disruptionBudget:
-    #           maxUnavailable: 0
+    - name: Deploy consul with helm
+      community.kubernetes.helm:
+        kubeconfig_path: "{{ working_dir }}/{{gcp_prefix}}-config"
+        name: consul
+        chart_ref: hashicorp/consul
+        release_namespace: hashicorp
+        state: absent
+        values:
+          global:
+            datacenter: vault-kubernetes-guide
+          client:
+            enabled: true
+          server:
+            replicas: 1
+            bootstrapExpect: 1
+            disruptionBudget:
+              maxUnavailable: 0
+
+    - name: Deploy vault with helm
+      community.kubernetes.helm:
+        kubeconfig_path: "{{ working_dir }}/{{gcp_prefix}}-config"
+        name: vault
+        chart_ref: hashicorp/vault
+        release_namespace: hashicorp
+        state: absent
+        values:
+          server:
+            affinity: ""
+            ha:
+              enabled: true
+          ui:
+            enabled: true
+            serviceType: "LoadBalancer"
+            serviceNodePort: null
+            externalPort: 8200
+
+    # - name: Retrieve unseal key
+    #   community.kubernetes.k8s_exec:
+    #     kubeconfig: "{{ working_dir }}/{{gcp_prefix}}-config"
+    #     namespace: hashicorp
+    #     pod: vault-0
+    #     command: "vault operator init -key-shares=1 -key-threshold=1 -format=json"
+    #   register: exec_output
     #
-    # - name: Deploy vault with helm
-    #   community.kubernetes.helm:
-    #     kubeconfig_path: "{{ working_dir }}/{{gcp_prefix}}-config"
-    #     name: vault
-    #     chart_ref: hashicorp/vault
-    #     release_namespace: hashicorp
-    #     values:
-    #       server:
-    #         affinity: ""
-    #         ha:
-    #           enabled: true
-    #       ui:
-    #         enabled: true
-    #         serviceType: "LoadBalancer"
-    #         serviceNodePort: null
-    #         externalPort: 8200
-
-    - name: Retrieve unseal key
-      community.kubernetes.k8s_exec:
-        kubeconfig: "{{ working_dir }}/{{gcp_prefix}}-config"
-        namespace: hashicorp
-        pod: vault-0
-        command: "vault operator init -key-shares=1 -key-threshold=1 -format=json"
-      register: exec_output
-
-    - debug:
-        var: exec_output
+    # - debug:
+    #     var: exec_output
+    #
+    # - copy:
+    #     path: "{{ working_dir }}/cluster-keys.json"
+    #     content: "{{ exec_output.stdout }}"
+    #
+    # - command: "cat {{ working_dir }}/cluster-keys.json | jq -r \".unseal_keys_b64[]\""
+    #   register: unseal_key
+    #
+    # - debug:
+    #     var: unseal_key
+    #
+    # - name: apply unseal key
+    #   community.kubernetes.k8s_exec:
+    #     kubeconfig: "{{ working_dir }}/{{gcp_prefix}}-config"
+    #     namespace: hashicorp
+    #     pod: "{{ item }}"
+    #     command: "vault operator unseal {{ unseal_key.stdout }}"
+    #   register: exec_output
+    #   with_items:
+    #     - vault-0
+    #     - vault-1
+    #     - vault-2
