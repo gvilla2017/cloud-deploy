@@ -1,5 +1,6 @@
+#https://github.com/ansible-collections/community.kubernetes
 ---
-- name: deploy nginx pod
+- name: deploy vault on helm
   hosts: localhost
   gather_facts: no
   vars_files:
@@ -41,3 +42,30 @@
             bootstrapExpect: 1
             disruptionBudget:
               maxUnavailable: 0
+
+    - name: Deploy vault with helm
+      community.kubernetes.helm:
+        kubeconfig_path: "{{ working_dir }}/{{gcp_prefix}}-config"
+        name: vault
+        chart_ref: hashicorp/consul
+        release_namespace: hashicorp
+        values:
+          server:
+            affinity: ""
+            ha:
+              enabled: true
+          ui:
+            enabled: true
+            serviceType: "LoadBalancer"
+            serviceNodePort: 8200
+            externalPort: 8200
+
+    - name: Retrieve
+      community.kubernetes.k8s_exec:
+        namespace: hashicorp
+        pod: vault-0
+        command: "vault operator init -key-shares=1 -key-threshold=1 -format=json"
+      register: exec_output
+
+    - debug:
+        var: exec_output
