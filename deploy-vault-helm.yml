@@ -86,14 +86,14 @@
     - debug:
         var: unseal_key
 
-    # - name: apply unseal key
-    #   community.kubernetes.k8s_exec:
-    #     kubeconfig: "{{ working_dir }}/{{gcp_prefix}}-config"
-    #     namespace: hashicorp
-    #     pod: "{{ item }}"
-    #     command: "vault operator unseal {{ unseal_key.stdout }}"
-    #   register: exec_output
-    #   with_items:
-    #     - vault-0
-    #     - vault-1
-    #     - vault-2
+    - name: apply unseal key
+      community.kubernetes.k8s_exec:
+        kubeconfig: "{{ working_dir }}/{{gcp_prefix}}-config"
+        namespace: hashicorp
+        pod: "{{ item }}"
+        command: "vault operator unseal {{ unseal_key.stdout }}"
+      register: exec_output
+      with_items:
+        - vault-0
+        - vault-1
+        - vault-2
