@@ -62,6 +62,7 @@
 
     - name: Retrieve
       community.kubernetes.k8s_exec:
+        kubeconfig_path: "{{ working_dir }}/{{gcp_prefix}}-config"
         namespace: hashicorp
         pod: vault-0
         command: "vault operator init -key-shares=1 -key-threshold=1 -format=json"
