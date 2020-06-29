@@ -47,7 +47,7 @@
       community.kubernetes.helm:
         kubeconfig_path: "{{ working_dir }}/{{gcp_prefix}}-config"
         name: vault
-        chart_ref: hashicorp/consul
+        chart_ref: hashicorp/vault
         release_namespace: hashicorp
         values:
           server:
