@@ -8,31 +8,31 @@
 
   tasks:
 
-    # - name: Grab hashicorp repository
-    #   community.kubernetes.helm_repository:
-    #     repo_name: hashicorp
-    #     repo_url: https://helm.releases.hashicorp.com
-    #     # host: https://35.232.78.79
-    #     # kubeconfig: "{{ working_dir }}/{{gcp_prefix}}-config"
-    #     state: present
-    #
-    # - name: Create helm namespace as HELM 3 doesn't create it automatically
-    #   community.kubernetes.k8s:
-    #     # host: https://35.232.78.79
-    #     kubeconfig: "{{ working_dir }}/{{gcp_prefix}}-config"
-    #     state: present
-    #     api_version: v1
-    #     kind: Namespace
-    #     name: "hashicorp"
-    #     wait: true
-    #
+    - name: Grab hashicorp repository
+      community.kubernetes.helm_repository:
+        repo_name: hashicorp
+        repo_url: https://helm.releases.hashicorp.com
+        # host: https://35.232.78.79
+        # kubeconfig: "{{ working_dir }}/{{gcp_prefix}}-config"
+        state: present
+
+    - name: Create helm namespace as HELM 3 doesn't create it automatically
+      community.kubernetes.k8s:
+        # host: https://35.232.78.79
+        kubeconfig: "{{ working_dir }}/{{gcp_prefix}}-config"
+        state: present
+        api_version: v1
+        kind: Namespace
+        name: "hashicorp"
+        wait: true
+
     - name: Deploy consul with helm
       community.kubernetes.helm:
         kubeconfig_path: "{{ working_dir }}/{{gcp_prefix}}-config"
         name: consul
         chart_ref: hashicorp/consul
         release_namespace: hashicorp
-        state: absent
+        state: present
         values:
           global:
             datacenter: vault-kubernetes-guide
@@ -50,7 +50,7 @@
         name: vault
         chart_ref: hashicorp/vault
         release_namespace: hashicorp
-        state: absent
+        state: present
         values:
           server:
             affinity: ""
@@ -62,27 +62,27 @@
             serviceNodePort: null
             externalPort: 8200
 
-    # - name: Retrieve unseal key
-    #   community.kubernetes.k8s_exec:
-    #     kubeconfig: "{{ working_dir }}/{{gcp_prefix}}-config"
-    #     namespace: hashicorp
-    #     pod: vault-0
-    #     command: "vault operator init -key-shares=1 -key-threshold=1 -format=json"
-    #   register: exec_output
-    #
-    # - debug:
-    #     var: exec_output
-    #
-    # - copy:
-    #     path: "{{ working_dir }}/cluster-keys.json"
-    #     content: "{{ exec_output.stdout }}"
-    #
-    # - command: "cat {{ working_dir }}/cluster-keys.json | jq -r \".unseal_keys_b64[]\""
-    #   register: unseal_key
-    #
-    # - debug:
-    #     var: unseal_key
-    #
+    - name: Retrieve unseal key
+      community.kubernetes.k8s_exec:
+        kubeconfig: "{{ working_dir }}/{{gcp_prefix}}-config"
+        namespace: hashicorp
+        pod: vault-0
+        command: "vault operator init -key-shares=1 -key-threshold=1 -format=json"
+      register: exec_output
+
+    - debug:
+        var: exec_output
+
+    - copy:
+        path: "{{ working_dir }}/cluster-keys.json"
+        content: "{{ exec_output.stdout }}"
+
+    - command: "cat {{ working_dir }}/cluster-keys.json | jq -r \".unseal_keys_b64[]\""
+      register: unseal_key
+
+    - debug:
+        var: unseal_key
+    
     # - name: apply unseal key
     #   community.kubernetes.k8s_exec:
     #     kubeconfig: "{{ working_dir }}/{{gcp_prefix}}-config"
