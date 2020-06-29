@@ -60,7 +60,7 @@
             serviceNodePort: null
             externalPort: 8200
 
-    - name: Retrieve
+    - name: Retrieve unseal key
       community.kubernetes.k8s_exec:
         kubeconfig: "{{ working_dir }}/{{gcp_prefix}}-config"
         namespace: hashicorp
