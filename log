@@ -1,0 +1,26 @@
+2020-08-19 20:36:45,636 p=26004 u=michaelford n=ansible | Process install dependency map
+2020-08-19 20:36:45,637 p=26004 u=michaelford n=ansible | |
+2020-08-19 20:36:45,740 p=26004 u=michaelford n=ansible | /
+2020-08-19 20:36:45,842 p=26004 u=michaelford n=ansible | -
+2020-08-19 20:36:45,947 p=26004 u=michaelford n=ansible | \
+2020-08-19 20:36:46,051 p=26004 u=michaelford n=ansible | |
+2020-08-19 20:36:46,154 p=26004 u=michaelford n=ansible | Starting collection install process
+2020-08-19 20:36:46,154 p=26004 u=michaelford n=ansible | |
+2020-08-19 20:36:46,255 p=26004 u=michaelford n=ansible | Skipping 'community.kubernetes' as it is already installed
+2020-08-19 20:38:11,770 p=26088 u=michaelford n=ansible | Process install dependency map
+2020-08-19 20:38:11,770 p=26088 u=michaelford n=ansible | |
+2020-08-19 20:38:11,881 p=26088 u=michaelford n=ansible | /
+2020-08-19 20:38:11,989 p=26088 u=michaelford n=ansible | -
+2020-08-19 20:38:12,090 p=26088 u=michaelford n=ansible | \
+2020-08-19 20:38:12,194 p=26088 u=michaelford n=ansible | |
+2020-08-19 20:38:12,298 p=26088 u=michaelford n=ansible | /
+2020-08-19 20:38:12,403 p=26088 u=michaelford n=ansible | -
+2020-08-19 20:38:12,507 p=26088 u=michaelford n=ansible | Starting collection install process
+2020-08-19 20:38:12,508 p=26088 u=michaelford n=ansible | |
+2020-08-19 20:38:12,612 p=26088 u=michaelford n=ansible | Installing 'community.kubernetes:1.0.0' to '/Users/michaelford/My Local Documents/github-workspace/cloud-deploy/collections/ansible_collections/community/kubernetes'
+2020-08-19 20:38:12,613 p=26088 u=michaelford n=ansible | /
+2020-08-19 20:38:12,716 p=26088 u=michaelford n=ansible | -
+2020-08-19 20:38:12,820 p=26088 u=michaelford n=ansible | \
+2020-08-19 20:38:12,923 p=26088 u=michaelford n=ansible | |
+2020-08-19 20:38:13,028 p=26088 u=michaelford n=ansible | /
+2020-08-19 20:38:13,134 p=26088 u=michaelford n=ansible | -
