@@ -51,4 +51,4 @@
         release_namespace: jenkins
         # state: absent
         wait: true
-        values: "{{ lookup('template', 'vars/helm_values/jenkins.yml') | from_yaml }}"
+        values: "{{ lookup('template', 'vars/helm_values/jenkins.yml')}}"
