@@ -1,7 +1,7 @@
 ---
 
 - name: "Create GCP Kubernetes Cluster {{ gcp_prefix }}-cluster"
-  gcp_container_cluster:
+  google.cloud.gcp_container_cluster:
     name: "{{ gcp_prefix }}-cluster"
     initial_node_count: 3
     master_auth:
@@ -18,7 +18,7 @@
   register: gcp_cluster
 
 - name: create a node pool
-  gcp_container_node_pool:
+  google.cloud.gcp_container_node_pool:
     name: "{{ gcp_prefix }}-pool"
     initial_node_count: 3
     cluster: "{{ gcp_cluster }}"
