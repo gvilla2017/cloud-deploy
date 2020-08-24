@@ -14,14 +14,14 @@
         repo_url: https://helm.releases.hashicorp.com
         state: present
 
-    - name: Create helm namespace as HELM 3 doesn't create it automatically
-      community.kubernetes.k8s:
-        kubeconfig: "{{ working_dir }}/{{gcp_prefix}}-config"
-        state: present
-        api_version: v1
-        kind: Namespace
-        name: hashicorp
-        wait: true
+    # - name: Create helm namespace as HELM 3 doesn't create it automatically
+    #   community.kubernetes.k8s:
+    #     kubeconfig: "{{ working_dir }}/{{gcp_prefix}}-config"
+    #     state: present
+    #     api_version: v1
+    #     kind: Namespace
+    #     name: hashicorp
+    #     wait: true
 
     - name: Deploy consul with helm
       community.kubernetes.helm:
