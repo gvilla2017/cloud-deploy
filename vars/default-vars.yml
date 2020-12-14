@@ -11,7 +11,7 @@ approver_email: gvillazon152@gmail.com
 ec2_region: us-east-2
 ec2_prefix: gv-linux
 application: apache
- machine_type: t2.medium
+machine_type: t2.medium
 # ec2_image_id: ami-02eac2c0129f6376b #Centos7
 # ec2_image_id: ami-07ebfd5b3428b6f4d #Ubuntu 18.04
 ec2_image_id: ami-03d64741867e7bb94 #RHEL 8
