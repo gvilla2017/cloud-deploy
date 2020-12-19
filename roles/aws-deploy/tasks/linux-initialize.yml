@@ -1,4 +1,8 @@
 ---
+
+- pause:
+    minutes: 2
+
 - block:
   - name: Wait for instances to be reachable
     wait_for_connection:
