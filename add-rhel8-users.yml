@@ -2,7 +2,7 @@
 ---
 - name: Add RHEL8 users from data file
   hosts: all
-  gather_facts: no
+  gather_facts: yes
   vars:
     servers_to_monitor: "{{ groups['all'] }}"
     # servers_to_monitor: "{{ groups['ec2'] }}"
