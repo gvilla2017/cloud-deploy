@@ -2,7 +2,7 @@
 ---
 - name: Add RHEL8 users from data file
   hosts: all
-#  gather_facts: yes
+  gather_facts: yes
   vars:
     servers_to_monitor: "{{ groups['all'] }}"
     # servers_to_monitor: "{{ groups['ec2'] }}"
@@ -25,7 +25,6 @@
 
     - name: Add RHEL8 users from data file on AWS
       block:
-      gather_facts: yes
 
         - name: Add RHEL8 users from data file AWS
           include_role:
