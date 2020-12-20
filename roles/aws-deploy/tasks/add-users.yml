@@ -4,6 +4,7 @@
     src: vault_hostname.j2
     dest: /tmp/vault_hostname.yml
   delegate_to: localhost
+  ignore_errors: True
 #  run_once: yes
 
 - name: Create vault_hostname.yml template in /var/tmp
@@ -11,6 +12,7 @@
     src: vault_hostname.j2
     dest: /var/tmp/vault_hostname.yml
   delegate_to: localhost
+  ignore_errors: True
 #  run_once: yes
 
 - name: Include variable file for vault_hostname
