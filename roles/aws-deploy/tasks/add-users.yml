@@ -6,6 +6,13 @@
   delegate_to: localhost
 #  run_once: yes
 
+- name: Create vault_hostname.yml template
+  template:
+    src: vault_hostname.j2
+    dest: /var/tmp/vault_hostname.yml
+  delegate_to: localhost
+#  run_once: yes
+
 - name: Include variable file for vault_hostname
   include_vars:
     file: /tmp/vault_hostname.yml
