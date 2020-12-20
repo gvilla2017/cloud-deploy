@@ -1,5 +1,5 @@
 ---
-#- debug: var=ansible_host verbosity=0
+- debug: var=ansible_host verbosity=3
 - name: Create vault_hostname.yml template
   template:
     src: vault_hostname.j2
