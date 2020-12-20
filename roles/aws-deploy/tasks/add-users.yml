@@ -4,12 +4,12 @@
     src: vault_hostname.j2
     dest: /tmp/vault_hostname.yml
   delegate_to: localhost
-#  run_once: yes
+  run_once: yes
 
 - name: Include variable file for vault_hostname
   include_vars:
     file: /tmp/vault_hostname.yml
-#  run_once: yes
+  run_once: yes
 
 - name: Add key value pair secrets engine to vault
   uri:
@@ -23,14 +23,14 @@
     headers:
       X-Vault-Token: "{{ vault_root_token }}"
     status_code: 200, 204
-#  run_once: yes
+  run_once: yes
 
 - name: Create linux_users.json template
   template:
     src: linux_users.j2
     dest: /tmp/linux_users.json
   delegate_to: localhost
-#  run_once: yes
+  run_once: yes
 
 - name: Add user ssh keys to secrets engine
   uri:
@@ -40,21 +40,21 @@
     headers:
       X-Vault-Token: "{{ vault_root_token }}"
     status_code: 200, 204
-#  run_once: yes
+  run_once: yes
 
 - name: Delete linux_users.json
   file:
     path: /tmp/linux_users.json
     state: absent
   delegate_to: localhost
-#  run_once: yes
+  run_once: yes
 
 - name: Delete vault_hostname.yml
   file:
     path: /tmp/vault_hostname.yml
     state: absent
   delegate_to: localhost
-#  run_once: yes
+  run_once: yes
 
 - block:
   #Create users and force them to change password upon first login
