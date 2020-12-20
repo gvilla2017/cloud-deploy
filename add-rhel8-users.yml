@@ -25,9 +25,9 @@
 
     - name: Add RHEL8 users from data file on AWS
       block:
+      gather_facts: yes
 
         - name: Add RHEL8 users from data file AWS
-          gather_facts: yes
           include_role:
             name: aws-deploy
             tasks_from: add-users
