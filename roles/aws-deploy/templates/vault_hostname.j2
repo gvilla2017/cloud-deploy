@@ -5,3 +5,4 @@ vault_hostname: {{ hostvars[host].ansible_host }}
 {% endif %}
 {% endfor %}
 {% if entry == host and 'ansible_host' in hostvars[host] %}
+{% endif %}
