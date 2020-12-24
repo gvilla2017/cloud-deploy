@@ -31,3 +31,10 @@ aws_instance_username: ec2-user
 #gcp_vpc_subnet: 192.168.0.0/28
 #gcp_disk_image: projects/rhel-cloud/global/images/rhel-8-v20200618 #RHEL 8
 #gcp_instance_username: ec2-user
+
+#VMWARE
+vcenter: 172.25.32.79
+datacenter: OSHIFT
+cluster: Cls02
+template: Rhel8_template
+vlan: "Vlan-670 172.25.35.xx"
