@@ -36,5 +36,5 @@ aws_instance_username: ec2-user
 vcenter: 172.25.32.79
 datacenter: OSHIFT
 cluster: Cls02
-template: Rhel8_template
+template: rhel8_template
 vlan: "Vlan-670 172.25.35.xx"
