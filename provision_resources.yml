@@ -36,7 +36,7 @@
             name: vmware-deploy
             tasks_from: provision-vmware-resources
 
-      when: cloud_provider == "aws"
+      when: cloud_provider == "vmware"
     # - name: Deploy AWS Resources
     #   block:
     #    # VPC or Virtual Private Cloud.  The instance will be tied to a subnet that belongs to this particular VPC
