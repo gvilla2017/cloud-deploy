@@ -1,33 +1,32 @@
 ---
-    - name: Deploy VM from template
-      vmware_guest:
+- name: Deploy VM from template
+  vmware_guest:
 #        hostname: "{{ vcenter }}"
 #        username: "{{ vc_username }}"
 #        password: "{{ vc_password }}"
-        validate_certs: no
-        folder: /Unix
-        datacenter: "{{ datacenter }}"
-        cluster: "{{ cluster }}"
-        state: poweredon
-        name: "{{ item.host_name }}"
-        template: "{{ template }}"
-        hardware:
-          memory_mb: 4096
-          num_cpus: 2
-          hotadd_cpu: True
-#         hotremove_cpu: True
-          hotadd_memory: True
-        networks:
-          - name: "{{ vlan }}"
-            ip: "{{ item.ip }}"
-            netmask: 255.255.255.0
-            gateway: 172.25.35.1
-            dns_servers:
-              - 216.126.217.253
-              - 216.126.217.254
-            start_connected: True
-      with_items:
-          - { host_name: 'test-1', ip: '172.25.35.193' }
-          - { host_name: 'test-2', ip: '172.25.35.194' }
-          - { host_name: 'test-3', ip: '172.25.35.195' }
-      wait_for_ip_address: yes
+    validate_certs: no
+    folder: /Unix
+    datacenter: "{{ datacenter }}"
+    cluster: "{{ cluster }}"
+    state: poweredon
+    name: "{{ item.host_name }}"
+    template: "{{ template }}"
+    hardware:
+      memory_mb: 4096
+      num_cpus: 2
+      hotadd_cpu: True
+#      hotremove_cpu: True
+      hotadd_memory: True
+    networks:
+      - name: "{{ vlan }}"
+        ip: "{{ item.ip }}"
+        netmask: 255.255.255.0
+        gateway: 172.25.35.1
+        dns_servers:
+          - 216.126.217.253
+          - 216.126.217.254
+        start_connected: True
+  with_items:
+      - { host_name: 'test-1', ip: '172.25.35.193' }
+      - { host_name: 'test-2', ip: '172.25.35.194' }
+      - { host_name: 'test-3', ip: '172.25.35.195' }
