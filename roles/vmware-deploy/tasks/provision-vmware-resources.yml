@@ -2,8 +2,8 @@
     - name: Deploy VM from template
       vmware_guest:
         hostname: "{{ vcenter }}"
-        username: "{{ username }}"
-        password: "{{ password }}"
+        username: "{{ vc_username }}"
+        password: "{{ vc_password }}"
         validate_certs: no
         folder: /Unix
         datacenter: "{{ datacenter }}"
