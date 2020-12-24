@@ -28,6 +28,16 @@
 
       when: cloud_provider == "aws"
 
+    - name: Provision Instances on VMWARE
+      block:
+
+        - name: Provision Instances on AWS
+          include_role:
+            name: vmware-deploy
+            tasks_from: provision-instances
+
+      when: cloud_provider == "vmware"
+
     # - name: Deploy AWS Instances
     #   block:
     #
