@@ -1,9 +1,6 @@
 ---
 - name: Deploy VM from template
   vmware_guest:
-#        hostname: "{{ vcenter }}"
-#        username: "{{ vc_username }}"
-#        password: "{{ vc_password }}"
     validate_certs: no
     folder: /Unix
     datacenter: "{{ datacenter }}"
@@ -15,7 +12,6 @@
       memory_mb: 4096
       num_cpus: 2
       hotadd_cpu: True
-#      hotremove_cpu: True
       hotadd_memory: True
     networks:
       - name: "{{ vlan }}"
@@ -27,6 +23,6 @@
           - 216.126.217.254
         start_connected: True
   with_items:
-      - { host_name: 'test-1', ip: '172.25.35.193' }
+      - { host_name: 'test-1', ip: '172.25.35.191' }
       - { host_name: 'test-2', ip: '172.25.35.194' }
       - { host_name: 'test-3', ip: '172.25.35.195' }
