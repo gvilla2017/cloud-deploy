@@ -47,7 +47,7 @@
       alternatives --set python /usr/bin/python3
       pip3 install ansible
 
-  - name: yum install packages
+  - name: yum install packages jinja2
     yum:
       name:
         - python3-jinja2
