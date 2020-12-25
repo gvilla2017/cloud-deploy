@@ -111,4 +111,3 @@
       line: 'PasswordAuthentication yes'
     notify: restart_sshd
     become: yes
-  when: tags.group == "rhel"

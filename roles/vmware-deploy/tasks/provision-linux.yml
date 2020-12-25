@@ -29,4 +29,3 @@
   - name: build report
     include_role:
       name: build_report
-  when: tags.group == "rhel"
