@@ -50,4 +50,3 @@
       name: podman-docker
       state: present
     become: yes
-  when: tags.group == "webserver"
