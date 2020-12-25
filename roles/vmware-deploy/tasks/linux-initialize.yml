@@ -31,8 +31,9 @@
         priority=1
 
   - name: yum install packages
-    yum:
-      name:
+    yum: 
+      name: "{{ packages }}"
+        packages:
         - bind-utils
         - net-tools
         - python3
@@ -40,22 +41,22 @@
         - wget
         - curl
         - vim
-      state: present
 
-  - name: Shell commands
+  - name: Shell commands alternatives for python
     shell:
       alternatives --set python /usr/bin/python3
       pip3 install ansible
 
   - name: yum install packages jinja2
     yum:
-      name:
+      name: "{{ packages }}"
         - python3-jinja2
 
-  - name: Shell commands
+  - name: Shell commands subscription manager
     shell:
       python --version
       ansible --version
+
   - name: Install subscription-manager
     yum:
       name: "{{ packages }}"
