@@ -30,6 +30,17 @@
             tasks_from: install-podman
 
       when: cloud_provider == "aws"
+
+    - name: Install Container Engine on VMware
+      block:
+
+        - name: Install Container Engine on VMware
+          include_role:
+            name: vmware-deploy
+            tasks_from: install-podman
+
+      when: cloud_provider == "vmware"
+
     # - block:
     #   - name: Register with activationkey and consume subscriptions matching Red Hat Enterprise Linux Server
     #     redhat_subscription:
