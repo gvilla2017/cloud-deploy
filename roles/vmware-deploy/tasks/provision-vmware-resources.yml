@@ -19,8 +19,7 @@
         netmask: 255.255.255.0
         gateway: 172.25.35.1
         dns_servers:
-          - 216.126.217.253
-          - 216.126.217.254
+          - 172.25.35.192
         start_connected: True
   with_items:
       - { host_name: 'servicenow-1', ip: '172.25.35.191' }
