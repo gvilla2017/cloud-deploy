@@ -45,7 +45,10 @@
 #    become: yes
 
   - name: Shell commands alternatives for python
-    shell:
+    shell: |
+      hostname
+      id
+      uptime 
       yum -y install bind-utils net-tools python3 python3-pip wget curl vim
       alternatives --set python /usr/bin/python3
       pip3 install ansible
