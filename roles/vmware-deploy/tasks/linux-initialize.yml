@@ -7,21 +7,70 @@
       timeout: 600
     ignore_errors: True
 
-  - name: Install subscription-manager
-    yum:
-      name: "{{ packages }}"
-    vars:
-      packages:
-      - subscription-manager
-      - subscription-manager-migration
-      - subscription-manager-migration-data
-    become: yes
+  - name: Creating
+  file:
+    path: "/etc/yum.repos.d/co.repo"
+    state: touch
 
-  - name: Register with activationkey and consume subscriptions matching Red Hat Enterprise Linux Server
-    redhat_subscription:
+
+  - name: add lines to co.repo file
+    blockinfile:
+      path: /etc/yum.repos.d/co.repo
+      block: |
+        [co]
+        name=co
+        baseurl=http://mirror.centos.org/centos/8/AppStream/x86_64/os/
+        enabled=1
+        gpgcheck=0
+
+        [cobase]
+        name=CentOS-$releasever - Base
+        baseurl=http://mirror.centos.org/centos/8/BaseOS/x86_64/os/
+        enabled=1
+        gpgcheck=0
+        priority=1
+
+  - name: yum install packages
+    yum:
+      name:
+        - bind-utils
+        - net-tools
+        - python3
+        - python3-pip
+        - wget
+        - curl
+        - vim
       state: present
-      activationkey: "{{ rhactivationkey }}"
-      org_id: "{{ rhorg_id }}"
-      auto_attach: true
-    become: yes
-  when: cloud_provider == "vmware"
+
+  - name: Shell commands
+    shell:
+      alternatives --set python /usr/bin/python3
+      pip3 install ansible
+
+  - name: yum install packages
+    yum:
+      name:
+        - python3-jinja2
+
+  - name: Shell commands
+    shell:
+      python --version
+      ansible --version
+    - name: Install subscription-manager
+      yum:
+        name: "{{ packages }}"
+      vars:
+        packages:
+        - subscription-manager
+        - subscription-manager-migration
+        - subscription-manager-migration-data
+      become: yes
+
+    - name: Register with activationkey and consume subscriptions matching Red Hat Enterprise Linux Server
+      redhat_subscription:
+        state: present
+        activationkey: "{{ rhactivationkey }}"
+        org_id: "{{ rhorg_id }}"
+        auto_attach: true
+      become: yes
+    when: cloud_provider == "vmware"
