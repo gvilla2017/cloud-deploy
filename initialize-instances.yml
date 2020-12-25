@@ -28,3 +28,13 @@
           tasks_from: linux-initialize
 
     when: cloud_provider == "aws"
+
+  - name: Initialize VMware Instances
+    block:
+
+      - name: Set up Linux Instances on VMware
+        include_role:
+          name: vmware-deploy
+          tasks_from: linux-initialize
+    when: cloud_provider == "vmware"
+
