@@ -23,6 +23,6 @@
           - 216.126.217.254
         start_connected: True
   with_items:
-      - { host_name: 'test-1', ip: '172.25.35.191' }
-      - { host_name: 'test-2', ip: '172.25.35.194' }
-      - { host_name: 'test-3', ip: '172.25.35.195' }
+      - { host_name: 'servicenow-1', ip: '172.25.35.191' }
+      - { host_name: 'servicenow-2', ip: '172.25.35.194' }
+      - { host_name: 'servicenow-3', ip: '172.25.35.195' }
