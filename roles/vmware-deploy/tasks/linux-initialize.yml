@@ -8,9 +8,9 @@
     ignore_errors: True
 
   - name: Creating
-  file:
-    path: "/etc/yum.repos.d/co.repo"
-    state: touch
+    file:
+      path: "/etc/yum.repos.d/co.repo"
+      state: touch
 
 
   - name: add lines to co.repo file
