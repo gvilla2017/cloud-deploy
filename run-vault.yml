@@ -27,3 +27,13 @@
             tasks_from: install-vault-podman
 
       when: cloud_provider == "aws"
+
+    - name: Set up secrets engine on VMware
+      block:
+
+        - name: Set up secrets engine on  VMware
+          include_role:
+            name: vmware-deploy
+            tasks_from: install-vault-podman
+
+      when: cloud_provider == "vmware"
