@@ -30,22 +30,23 @@
         gpgcheck=0
         priority=1
 
-  - name: "Yum install Packages"
-    yum:
-      name: "{{ packages }}"
-    vars:
-      packages:
-      - bind-utils
-      - net-tools
-      - python3
-      - python3-pip
-      - wget
-      - curl
-      - vim
-    become: yes
+#  - name: "Yum install Packages"
+#    yum:
+#      name: "{{ packages }}"
+#    vars:
+#      packages:
+#      - bind-utils
+#      - net-tools
+#      - python3
+#      - python3-pip
+#      - wget
+#      - curl
+#      - vim
+#    become: yes
 
   - name: Shell commands alternatives for python
     shell:
+      yum -y install bind-utils net-tools python3 python3-pip wget curl vim
       alternatives --set python /usr/bin/python3
       pip3 install ansible
     become: yes
