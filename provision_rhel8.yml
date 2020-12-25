@@ -26,3 +26,13 @@
             tasks_from: provision-linux
 
       when: cloud_provider == "aws"
+
+    - name: Ensure Standard Linux Configuration on VMware
+      block:
+
+        - name: Ensure Standard Linux Configuration on VMware
+          include_role:
+            name: vmware-deploy
+            tasks_from: provision-linux
+
+      when: cloud_provider == "vmware"

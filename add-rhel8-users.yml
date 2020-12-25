@@ -33,6 +33,16 @@
 
       when: cloud_provider == "aws"
 
+    - name: Add RHEL8 users from data file on VMware
+      block:
+
+        - name: Add RHEL8 users from data file VMware
+          include_role:
+            name: vmware-deploy
+            tasks_from: add-users
+
+      when: cloud_provider == "vmware"
+
   #   - name: Create vault_hostname.yml template
   #     template:
   #       src: ./templates/vault_hostname.j2
