@@ -54,27 +54,28 @@
       pip3 install ansible
     become: yes
 
-  - name: yum install packages jinja2
-    yum:
-      name:
-        - python3-jinja2
-      state: present
-    become: yes
+#  - name: yum install packages jinja2
+#    yum: 
+#      name:
+#        - python3-jinja2
+#      state: present
+#    become: yes
 
   - name: Shell commands subscription manager
-    shell:
+    shell: |
       python --version
       ansible --version
+      yum -y install subscription-manager subscription-manager-migration subscription-manager-migration-data
     become: yes
 
-  - name: Install subscription-manager
-    yum:
-      name: 
-        - subscription-manager
-        - subscription-manager-migration
-        - subscription-manager-migration-data
-      state: present
-    become: yes
+#  - name: Install subscription-manager
+#    yum:
+#      name: 
+#        - subscription-manager
+#        - subscription-manager-migration
+#        - subscription-manager-migration-data
+#      state: present
+#    become: yes
 
   - name: Register with activationkey and consume subscriptions matching Red Hat Enterprise Linux Server
     redhat_subscription:
