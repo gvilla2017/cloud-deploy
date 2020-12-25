@@ -64,7 +64,7 @@
     yum:
       name: "{{ item }}"
       state: present
-    with-itmes:
+    with_items:
       - subscription-manager
       - subscription-manager-migration
       - subscription-manager-migration-data
