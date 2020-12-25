@@ -32,15 +32,16 @@
 
   - name: "Yum install Packages"
     yum:
-      name:
-        - bind-utils
-        - net-tools
-        - python3
-        - python3-pip
-        - wget
-        - curl
-        - vim
-      state: present
+      name: "{{ packages }}"
+    vars:
+      packages:
+      - bind-utils
+      - net-tools
+      - python3
+      - python3-pip
+      - wget
+      - curl
+      - vim
     become: yes
 
   - name: Shell commands alternatives for python
