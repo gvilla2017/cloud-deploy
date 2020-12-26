@@ -31,7 +31,8 @@
         "type": "kv"
       }
     headers:
-      X-Vault-Token: "{{ vault_root_token }}"
+#      X-Vault-Token: "{{ vault_root_token }}"
+      X-Vault-Token: "thetoken"
     status_code: 200, 204
 #  run_once: yes
 
@@ -48,7 +49,8 @@
     method: POST
     src: /tmp/linux_users.json
     headers:
-      X-Vault-Token: "{{ vault_root_token }}"
+#      X-Vault-Token: "{{ vault_root_token }}"
+      X-Vault-Token: "thetoken"
     status_code: 200, 204
 #  run_once: yes
 
