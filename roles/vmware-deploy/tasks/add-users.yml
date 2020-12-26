@@ -4,18 +4,18 @@
   template:
     src: vault_hostname.j2
     dest: /tmp/vault_hostname.yml
+  when: ansible_host == "servernow-1.serv.com"
   delegate_to: localhost
   ignore_errors: True
-  when ansible_host == "servernow-1.serv.com"
 #  run_once: yes
 
 - name: Create vault_hostname.yml template in /var/tmp
   template:
     src: vault_hostname.j2
     dest: /var/tmp/vault_hostname.yml
+  when: ansible_host == "servernow-1.serv.com"
   delegate_to: localhost
   ignore_errors: True
-  when ansible_host == "servernow-1.serv.com"
 #  run_once: yes
 
 - name: Include variable file for vault_hostname
