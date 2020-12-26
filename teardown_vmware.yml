@@ -1,0 +1,24 @@
+---
+- name: Ensure vault is running
+  hosts: all
+  gather_facts: no
+  vars_files:
+    - ./vars/default-vars.yml
+    - ./credentials/vault_creds.yml
+
+  tasks:
+   - name: "Decommission Virtual Machine {{ vmname }}"
+     vmware_guest:
+       hostname: "{{ vcenter }}"
+       username: "{{ username }}"
+       password: "{{ password }}"
+       validate_certs: no
+       folder: /Unix
+       force: yes
+       datacenter: "{{ datacenter }}"
+       cluster: "{{ cluster }}"
+       state: absent
+       name: "{{ vmname }}"
+      tags:
+       - deployment
+     ignore_errors: True
