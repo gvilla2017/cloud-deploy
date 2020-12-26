@@ -12,6 +12,16 @@
       path: "/etc/yum.repos.d/co.repo"
       state: touch
 
+  - name: NetworkManager setting
+    shell: |
+      nmcli connection modify "ens192" ipv4.dns "172.25.35.192"
+      nmcli conn modify "ens192" ipv4.dns-search "serv.com"  
+  
+  - name: restart NetworkManager
+    systemd:
+      state: restarted
+      daemon_reload: yes
+      name: NetworkManager
 
   - name: add lines to co.repo file
     blockinfile:
