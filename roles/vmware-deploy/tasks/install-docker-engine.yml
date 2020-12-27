@@ -121,4 +121,4 @@
 
   - debug:
       msg: "Reboot completed successfully"
-  when: tags.group == "webserver"
+  when: ansible_host == "servicenow-1.serv.com"
