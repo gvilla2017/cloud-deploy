@@ -89,6 +89,13 @@
 #      state: present
 #    become: yes
 
+  - name: disable firewalld
+    systemd: name=firewalld enabled=no
+
+  - name: be sure firewalld is stopped
+    systemd: name=firewalld state=stopped
+    ignore_errors: yes
+
   - name: Register with activationkey and consume subscriptions matching Red Hat Enterprise Linux Server
     redhat_subscription:
       state: present
