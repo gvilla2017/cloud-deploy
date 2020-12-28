@@ -4,7 +4,7 @@
 ---
 - name: Ensure Container Engine is installed on webserver
   hosts: all
-  gather_facts: no
+  gather_facts: yes
   vars_files:
     - ./vars/default-vars.yml
     - ./credentials/redhat-activation-key.yml
