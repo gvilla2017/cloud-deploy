@@ -39,7 +39,7 @@
             name: vmware-deploy
             tasks_from: install-podman
 
-      when: cloud_provider == "vmware"
+      when: cloud_provider == "vmware" and ansible_host == "servicenow-1"
 
     # - block:
     #   - name: Register with activationkey and consume subscriptions matching Red Hat Enterprise Linux Server
