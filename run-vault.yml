@@ -1,7 +1,7 @@
 ---
 - name: Ensure vault is running
   hosts: all
-  gather_facts: no
+  gather_facts: yes
   vars_files:
     - ./vars/default-vars.yml
     - ./credentials/vault_creds.yml
@@ -36,4 +36,4 @@
             name: vmware-deploy
             tasks_from: install-vault-podman
 
-      when: cloud_provider == "vmware"
+      when: cloud_provider == "vmware" and ansible_hostname == "servicenow-1"
