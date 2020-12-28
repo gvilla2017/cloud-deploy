@@ -105,9 +105,13 @@
               datacenter: "{{ datacenter }}"
               cluster: "{{ cluster }}"
               state: absent
-              name: "{{ vmname }}"
+              name: "{{ item }}"
              tags:
               - deployment
             ignore_errors: True
+           loop:
+              - servicenow-1
+              - servicenow-2
+              - servicenow-3
 
       when: cloud_provider == "vmware"
