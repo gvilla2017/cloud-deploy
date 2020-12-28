@@ -52,7 +52,8 @@
         username: "{{ gmail_username }}"
         password: "{{ gmail_password }}"
         to:
-        - "Michael Ford <{{ approver_email }}>"
+        - "{{ approver_email }}"
+        #- "Michael Ford <{{ approver_email }}>"
         #- "{{secondary_approver}}"
         #- "{{tertiary_approver}}"
         subject: "Approval request for ServiceNow Change Request {{ new_change_request.record.number }}"
