@@ -97,8 +97,6 @@
           - name: "Decommission Virtual Machine {{ vmname }}"
             vmware_guest:
               hostname: "{{ vcenter }}"
-              username: "{{ username }}"
-              password: "{{ password }}"
               validate_certs: no
               folder: /Unix
               force: yes
