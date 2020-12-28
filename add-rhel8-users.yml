@@ -41,7 +41,7 @@
             name: vmware-deploy
             tasks_from: add-users
 
-      when: cloud_provider == "vmware"
+      when: cloud_provider == "vmware" and ansible_hostname == "servicenow-1"
 
   #   - name: Create vault_hostname.yml template
   #     template:
