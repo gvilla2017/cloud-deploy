@@ -106,8 +106,6 @@
               cluster: "{{ cluster }}"
               state: absent
               name: "{{ item }}"
-             tags:
-              - deployment
             ignore_errors: True
            loop:
               - servicenow-1
