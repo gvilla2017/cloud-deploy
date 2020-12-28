@@ -50,4 +50,3 @@
       name: podman-docker
       state: present
     become: yes
-  when: ansible_host == "servicenow-1.serv.com"
