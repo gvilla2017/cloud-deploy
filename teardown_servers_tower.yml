@@ -107,9 +107,9 @@
               state: absent
               name: "{{ item }}"
             ignore_errors: True
-           loop:
-              - servicenow-1
-              - servicenow-2
-              - servicenow-3
+            loop:
+               - servicenow-1
+               - servicenow-2
+               - servicenow-3
 
       when: cloud_provider == "vmware"
