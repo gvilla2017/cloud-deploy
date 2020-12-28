@@ -90,3 +90,24 @@
 
 
       when: cloud_provider == "gcp"
+
+
+    - name: Teardown GCP Instances
+      block:
+          - name: "Decommission Virtual Machine {{ vmname }}"
+            vmware_guest:
+              hostname: "{{ vcenter }}"
+              username: "{{ username }}"
+              password: "{{ password }}"
+              validate_certs: no
+              folder: /Unix
+              force: yes
+              datacenter: "{{ datacenter }}"
+              cluster: "{{ cluster }}"
+              state: absent
+              name: "{{ vmname }}"
+             tags:
+              - deployment
+            ignore_errors: True
+
+      when: cloud_provider == "vmware"
