@@ -45,21 +45,32 @@
       when: from_snow|bool
 
     #https://www.infinitypp.com/ansible/email-notifications-with-examples/
-    - name: Sending an email requesting approval
+    - name: Sending an e-mail using Gmail SMTP servers
       mail:
         host: smtp.gmail.com
         port: 587
-        username: "{{ gmail_username }}"
-        password: "{{ gmail_password }}"
-        to:
-        - "{{ approver_email }}"
-        #- "Michael Ford <{{ approver_email }}>"
-        #- "{{secondary_approver}}"
-        #- "{{tertiary_approver}}"
+        username: gvillazon152@gmail.com
+        password: robert1520
+        to: George Villazon <gvillazon152@gmail.com>
         subject: "Approval request for ServiceNow Change Request {{ new_change_request.record.number }}"
         body: "You have a new CR Approval request. Please click on this URL to approve: https://{{ SNOW_INSTANCE }}.service-now.com/nav_to.do?uri=change_request.do?sysparm_query=number={{ new_change_request.record.number }}"
       delegate_to: localhost
       when: from_snow|bool
+#    - name: Sending an email requesting approval
+#      mail:
+#        host: smtp.gmail.com
+#        port: 587
+#        username: "{{ gmail_username }}"
+#        password: "{{ gmail_password }}"
+#        to:
+#        - "{{ approver_email }}"
+#        #- "Michael Ford <{{ approver_email }}>"
+#        #- "{{secondary_approver}}"
+#        #- "{{tertiary_approver}}"
+#        subject: "Approval request for ServiceNow Change Request {{ new_change_request.record.number }}"
+#        body: "You have a new CR Approval request. Please click on this URL to approve: https://{{ SNOW_INSTANCE }}.service-now.com/nav_to.do?uri=change_request.do?sysparm_query=number={{ new_change_request.record.number }}"
+#      delegate_to: localhost
+#      when: from_snow|bool
 
     - name: Wait for Change Request approval
       snow_record_find:
