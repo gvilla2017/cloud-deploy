@@ -19,7 +19,7 @@
         password: "{{ gmail_password }}"
         to:
         - "Michael Ford <{{ approver_email }}>"
-        - "{{secondary_approver}}"
+#        - "{{secondary_approver}}"
         #- "{{tertiary_approver}}"
         subject: "Change Request {{ snow_cr_number }} Successful"
         body: "Your ServiceNow Change Request {{ snow_cr_number }} has been completed successfully!"
