@@ -15,12 +15,13 @@
       mail:
         host: smtp.gmail.com
         port: 587
-        username: "{{ gmail_username }}"
-        password: "{{ gmail_password }}"
-        to:
-        - "Michael Ford <{{ approver_email }}>"
+        username: gvillazon152@gmail.com
+        password: gnlukqrgpubxbnhc
+        to: gvillazon152@gmail.com <George.Villazon@gmail.com>
+#        to:
+#        - "Michael Ford <{{ approver_email }}>"
 #        - "{{secondary_approver}}"
-        #- "{{tertiary_approver}}"
+#        - "{{tertiary_approver}}"
         subject: "Change Request {{ snow_cr_number }} Successful"
         body: "Your ServiceNow Change Request {{ snow_cr_number }} has been completed successfully!"
       delegate_to: localhost
