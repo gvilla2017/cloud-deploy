@@ -92,7 +92,7 @@
       when: cloud_provider == "gcp"
 
 
-    - name: Teardown GCP Instances
+    - name: Teardown VMware Instances
       block:
           - name: "Decommission Virtual Machine {{ vmname }}"
             vmware_guest:
